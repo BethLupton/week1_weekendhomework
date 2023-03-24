@@ -14,5 +14,26 @@ def get_pets_sold(shop):
 
 def increase_pets_sold(shop, pets_sold):
      shop["admin"]["pets_sold"] =  shop["admin"]["pets_sold"] + pets_sold
+
+def get_stock_count(shop):
+    return len(shop["pets"])
     
-    
+def get_pets_by_breed(shop,breed):
+    pets=[]
+    shop_pets = shop["pets"]
+
+    for shop_pet in shop_pets:
+        shop_pet_breed = shop_pet["breed"]
+        if shop_pet_breed == breed:
+            pets.append(shop_pet)
+    return pets
+
+def find_pet_by_name(shop,pet_name):
+    pet = None
+    shop_pets = shop["pets"]
+
+    for shop_pet in shop_pets:
+        shop_pet_name = shop_pet["name"]
+        if shop_pet_name == pet_name:
+            pet = shop_pet
+    return pet
