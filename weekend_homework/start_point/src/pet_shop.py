@@ -29,14 +29,10 @@ def get_pets_by_breed(shop,breed):
     return pets
 
 def find_pet_by_name(shop,pet_name):
-    pet = None
-    shop_pets = shop["pets"]
-
-    for shop_pet in shop_pets:
-        shop_pet_name = shop_pet["name"]
-        if shop_pet_name == pet_name:
-            pet = shop_pet
-    return pet
+    for shop_pet in shop["pets"]:
+        if shop_pet["name"] == pet_name:
+           return shop_pet
+    return None
 
 def remove_pet_by_name(shop, pet_name):
     for pet in shop["pets"]:
@@ -60,6 +56,17 @@ def add_pet_to_customer(customer,new_pet):
 
 def customer_can_afford_pet(customer,new_pet): 
     return customer["cash"] >= new_pet["price"]
+
+def sell_pet_to_customer(shop, pet, customer):
+    if pet == None:
+        return
+    if customer_can_afford_pet(customer, pet):
+        remove_customer_cash(customer, pet["price"])
+        add_or_remove_cash(shop, pet["price"])
+        add_pet_to_customer(customer, pet)
+        remove_pet_by_name(shop, pet["name"])
+        increase_pets_sold(shop, 1)
+
 
 
 
